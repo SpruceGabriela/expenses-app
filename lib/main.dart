@@ -16,19 +16,20 @@ class Home extends StatelessWidget {
         title: 
         Text('Expenses'),
         ),
-        body: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text('CHART'),
-                elevation: 5,
-              ),
-            ),
-            UserTransaction(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  child: Card(
+                    child: Text('CHART'),
+                    elevation: 5,
+                  ),
+                ),
+                UserTransaction(),
+              ],
+          ),
         ),
     );
   }
