@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './widgets/user_transactions.dart';
 
 void main(){
   runApp(MaterialApp(
@@ -7,10 +8,6 @@ void main(){
 }
 
 class Home extends StatelessWidget {
-
-  // String titleInput;
-  // String amountInput;
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class Home extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            
+            UserTransaction(),
           ],
         ),
     );
