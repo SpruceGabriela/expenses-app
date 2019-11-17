@@ -13,9 +13,14 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: 
-        Text('Expenses'),
-        ),
+        title: Text('Expenses'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){},
+          ),
+        ],
+      ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,6 +35,11 @@ class Home extends StatelessWidget {
                 UserTransaction(),
               ],
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: (){},
         ),
     );
   }
