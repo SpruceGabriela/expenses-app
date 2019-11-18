@@ -5,7 +5,12 @@ import 'models/transaction.dart';
 
 void main(){
   runApp(MaterialApp(
+    title: 'Personal Expenses',
     debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      primarySwatch: Colors.teal,
+          accentColor: Colors.pinkAccent,
+    ),
     home: Home(),
   ));
 }
@@ -61,7 +66,7 @@ class _HomeState extends State<Home> {
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Expenses'),
+          title: Text('Personal Expenses'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
