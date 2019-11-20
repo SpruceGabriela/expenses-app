@@ -1,3 +1,4 @@
+import 'package:expenses/widgets/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:expenses/widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
@@ -94,10 +95,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                child: Card(
-                  child: Text('CHART'),
-                  elevation: 5,
-                ),
+                child: Chart(_userTransactions),
               ),
               TransactionList(_userTransactions),
             ],
