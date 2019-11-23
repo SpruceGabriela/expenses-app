@@ -17,6 +17,7 @@ void main(){
               fontFamily: 'OpenSans',
               fontSize: 18,
               fontWeight: FontWeight.bold),
+          button: TextStyle(color: Colors.white)
           ),
       appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -51,11 +52,11 @@ class _HomeState extends State<Home> {
       // ),
     ];
 
-    void _addNewTransaction(String txTitle, double txAmount){
+    void _addNewTransaction(String txTitle, double txAmount, DateTime choseDate){
       final newTx = Transaction(
           title: txTitle,
           amount: txAmount,
-          date: DateTime.now(),
+          date: choseDate,
           id: DateTime.now().toString()
       );
 
