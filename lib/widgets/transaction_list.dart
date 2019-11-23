@@ -31,43 +31,21 @@ class _TransactionListState extends State<TransactionList> {
         itemCount: widget.transactions.length,
         itemBuilder: (context, index){
           return Card(
-            child: Row(
-              children: <Widget>[
-                Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 15),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 2, )
+            margin: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+            elevation: 2,
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                  padding: EdgeInsets.all(6),
+                  child: FittedBox(child: Text('\$${widget.transactions[index].amount.toStringAsFixed(2)}'),),
                 ),
-                padding: EdgeInsets.symmetric(
-                  vertical: 5,
-                  horizontal: 5),
-                child: Text(
-                  '\$${widget.transactions[index].amount.toStringAsFixed(2)}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  ),
-                  ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                    widget.transactions[index].title,
-                    style: Theme.of(context).textTheme.title,
-                    ),
-                    Text(
-                    DateFormat.yMMMd().format(widget.transactions[index].date),
-                    style: TextStyle(color: Colors.grey),
-                    )
-                  ],
+              ),
+              title: Text(
+                widget.transactions[index].title,
+                style: Theme.of(context).textTheme.title,
                 ),
-              ],
+              subtitle: Text(DateFormat("dd/MM/yyyy").format(widget.transactions[index].date),),
             ),
           );
         },
