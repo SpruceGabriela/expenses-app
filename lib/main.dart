@@ -53,6 +53,8 @@ class _HomeState extends State<Home> {
       // ),
     ];
 
+    bool _showChart = false;
+
     void _addNewTransaction(String txTitle, double txAmount, DateTime choseDate){
       final newTx = Transaction(
           title: txTitle,
@@ -87,8 +89,7 @@ class _HomeState extends State<Home> {
 
     @override
     Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
+      final appBar = AppBar(
           title: Text('Personal Expenses'),
           actions: <Widget>[
             IconButton(
@@ -96,16 +97,38 @@ class _HomeState extends State<Home> {
               onPressed: () =>_startAddNewTransaction(context),
             ),
           ],
-        ),
+        );
+      return Scaffold(
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Chart(_userTransactions),
-              ),
-              TransactionList(_userTransactions, _deleteTransaction),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                Text('Show Chart'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (val){
+                    setState(() {
+                      _showChart = val;
+                    });
+                  },)
+              ],),
+              _showChart ? Container(
+                height: (MediaQuery.of(context).size.height -
+                appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top
+                ) * 0.7,
+                child: Chart(_userTransactions)
+                ) : Container(
+                height: (MediaQuery.of(context).size.height -
+                 appBar.preferredSize.height -
+                 MediaQuery.of(context).padding.top
+                 ) * 0.7,
+                child: TransactionList(_userTransactions, _deleteTransaction)
+                ),
             ],
           ),
         ),

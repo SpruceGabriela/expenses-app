@@ -17,18 +17,21 @@ class _TransactionListState extends State<TransactionList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
       child: widget.transactions.isEmpty
-      ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('Not transactions added yet!', style: Theme.of(context).textTheme.title),
-          SizedBox(height: 20,),
-          Container(
-            height: 200,
-            child: Image.asset('assets/images/image/waiting.png', fit: BoxFit.cover,)
-            ),
-        ],
+      ? LayoutBuilder(
+        builder: (ctx, constraint){
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text('Not transactions added yet!', style: Theme.of(context).textTheme.title),
+              SizedBox(height: 20,),
+              Container(
+                height: constraint.maxHeight * 0.6,
+                child: Image.asset('assets/images/image/waiting.png', fit: BoxFit.cover,)
+                ),
+            ],
+          );
+        },
       )
        : ListView.builder(
         itemCount: widget.transactions.length,
