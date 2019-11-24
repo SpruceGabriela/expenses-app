@@ -11,6 +11,7 @@ void main(){
     theme: ThemeData(
       primarySwatch: Colors.teal,
           accentColor: Colors.pinkAccent,
+          errorColor: Colors.red,
       fontFamily: 'Quicksand',
       textTheme: ThemeData.light().textTheme.copyWith(
           title: TextStyle(
@@ -78,6 +79,12 @@ class _HomeState extends State<Home> {
       );
     }
 
+    void _deleteTransaction(String id){
+      setState(() {
+        _userTransactions.retainWhere((tx) => tx.id == id);
+      });
+    }
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -98,7 +105,7 @@ class _HomeState extends State<Home> {
                 width: double.infinity,
                 child: Chart(_userTransactions),
               ),
-              TransactionList(_userTransactions),
+              TransactionList(_userTransactions, _deleteTransaction),
             ],
           ),
         ),
