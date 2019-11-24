@@ -89,6 +89,7 @@ class _HomeState extends State<Home> {
 
     @override
     Widget build(BuildContext context) {
+      final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
       final appBar = AppBar(
           title: Text('Personal Expenses'),
           actions: <Widget>[
@@ -98,13 +99,22 @@ class _HomeState extends State<Home> {
             ),
           ],
         );
+
+      final txListWidget = Container(
+        height: (MediaQuery.of(context).size.height -
+          appBar.preferredSize.height -
+          MediaQuery.of(context).padding.top
+          ) * 0.7,
+        child: TransactionList(_userTransactions, _deleteTransaction)
+        );
+
       return Scaffold(
         appBar: appBar,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row(
+              if(isLandscape) Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                 Text('Show Chart'),
@@ -116,19 +126,23 @@ class _HomeState extends State<Home> {
                     });
                   },)
               ],),
-              _showChart ? Container(
+              if(!isLandscape) Container(
+                height: (MediaQuery.of(context).size.height -
+                appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top
+                ) * 0.3,
+                child: Chart(_userTransactions)
+                ),
+
+              if(!isLandscape) txListWidget,
+
+              if(isLandscape) _showChart ? Container(
                 height: (MediaQuery.of(context).size.height -
                 appBar.preferredSize.height -
                 MediaQuery.of(context).padding.top
                 ) * 0.7,
                 child: Chart(_userTransactions)
-                ) : Container(
-                height: (MediaQuery.of(context).size.height -
-                 appBar.preferredSize.height -
-                 MediaQuery.of(context).padding.top
-                 ) * 0.7,
-                child: TransactionList(_userTransactions, _deleteTransaction)
-                ),
+              ) : txListWidget
             ],
           ),
         ),
