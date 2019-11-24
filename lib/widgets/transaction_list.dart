@@ -12,6 +12,8 @@ class TransactionList extends StatefulWidget {
 }
 
 class _TransactionListState extends State<TransactionList> {
+  Transaction _deletedTx;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,8 +52,25 @@ class _TransactionListState extends State<TransactionList> {
               trailing: IconButton(
                 icon: Icon(Icons.delete),
                 color: Theme.of(context).errorColor,
-                onPressed: () => widget.deleteTx(widget.transactions[index].id),
-                ),
+                onPressed: () {
+                  _deletedTx = widget.transactions[index];
+                  widget.deleteTx(widget.transactions[index].id);
+
+                  final snackBar = SnackBar(
+                    content: Text("${_deletedTx.title} was deleted"),
+                    action: SnackBarAction(
+                      label: "undo",
+                      onPressed: () {
+                        setState(() {
+                          widget.transactions.add(_deletedTx);
+                        });
+                      },
+                    ),
+                  );
+
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+              ),  
             ),
           );
         },
