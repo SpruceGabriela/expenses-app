@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
 
     void _deleteTransaction(String id){
       setState(() {
-        _userTransactions.retainWhere((tx) => tx.id == id);
+        _userTransactions.removeWhere((tx) => tx.id == id);
       });
     }
 
