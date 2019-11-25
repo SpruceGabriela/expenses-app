@@ -52,7 +52,31 @@ class _TransactionListState extends State<TransactionList> {
                 style: Theme.of(context).textTheme.title,
                 ),
               subtitle: Text(DateFormat("dd/MM/yyyy").format(widget.transactions[index].date),),
-              trailing: IconButton(
+              trailing: MediaQuery.of(context).size.width > 460
+                  ? FlatButton.icon(
+                    icon: Icon(Icons.delete),
+                    textColor: Theme.of(context).errorColor,
+                    label: Text('Delete'),
+                    onPressed: () {
+                      _deletedTx = widget.transactions[index];
+                      widget.deleteTx(widget.transactions[index].id);
+
+                      final snackBar = SnackBar(
+                        content: Text("${_deletedTx.title} was deleted"),
+                        action: SnackBarAction(
+                          label: "undo",
+                          onPressed: () {
+                            setState(() {
+                              widget.transactions.add(_deletedTx);
+                            });
+                          },
+                        ),
+                      );
+
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    },
+                  )
+                  : IconButton(
                 icon: Icon(Icons.delete),
                 color: Theme.of(context).errorColor,
                 onPressed: () {
